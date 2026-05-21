@@ -6,18 +6,20 @@ import { AuthServicio } from './auth-servicio';
 import { environment } from '../../environments/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmpresaServicio {
-
   private baseUrl = environment.apiUrl + '/empresas';
 
-  constructor(private http: HttpClient, private authServicio: AuthServicio) {}
+  constructor(
+    private http: HttpClient,
+    private authServicio: AuthServicio,
+  ) {}
 
-  /** Cabecera Authorization con Basic Auth. 
+  /** Cabecera Authorization con Basic Auth.
    * Obtiene email y password con la sesión en localStorage y codifica
-   * a Base64 con btoa(). 
-  */
+   * a Base64 con btoa().
+   */
   private headers(): HttpHeaders {
     const sesion = this.authServicio.obtenerSesion();
     const credenciales = btoa(`${sesion?.email}:${sesion?.['password']}`);
@@ -26,32 +28,20 @@ export class EmpresaServicio {
 
   // GET /api/empresas - Devuelve todas las empresas.
   listar(): Observable<Empresa[]> {
-    const sesion = this.authServicio.obtenerSesion();
-    if (sesion) {
-      return this.http.get<Empresa[]>(this.baseUrl, { headers: this.headers() });
-    }
     return this.http.get<Empresa[]>(this.baseUrl);
   }
 
-  // GET /api/empresas/{id} - Devuelve una empresa por su id. 
+  // GET /api/empresas/{id} - Devuelve una empresa por su id.
   obtener(id: number): Observable<Empresa> {
-    const sesion = this.authServicio.obtenerSesion();
-    if (sesion) {
-      return this.http.get<Empresa>(`${this.baseUrl}/${id}`, { headers: this.headers() });
-    }
     return this.http.get<Empresa>(`${this.baseUrl}/${id}`);
   }
 
   // GET /api/empresas/buscar?nombre=X&categoriaId=Y - Construye los parámetros de búsqueda.
-  // Pasa nombre, categoriaId o ambos. 
+  // Pasa nombre, categoriaId o ambos.
   buscar(nombre?: string, categoriaId?: number): Observable<Empresa[]> {
     let params = '';
     if (nombre) params += `nombre=${nombre}&`;
     if (categoriaId) params += `categoriaId=${categoriaId}`;
-    const sesion = this.authServicio.obtenerSesion();
-    if (sesion) {
-      return this.http.get<Empresa[]>(`${this.baseUrl}/buscar?${params}`, { headers: this.headers() });
-    }
     return this.http.get<Empresa[]>(`${this.baseUrl}/buscar?${params}`);
   }
 

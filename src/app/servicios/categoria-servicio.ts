@@ -22,10 +22,6 @@ export class CategoriaServicio {
 
   // GET /api/categorias - Devuelve todas las categorías
   listar(): Observable<Categoria[]> {
-    const sesion = this.authServicio.obtenerSesion();
-    if (sesion) {
-      return this.http.get<Categoria[]>(this.baseUrl, { headers: this.headers() });
-    }
     return this.http.get<Categoria[]>(this.baseUrl);
   }
 }
