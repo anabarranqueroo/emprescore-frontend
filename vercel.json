@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/emprescore_frontend/home",
+  "outputDirectory": "dist/emprescore_frontend/browser",
   "installCommand": "npm install",
   "rewrites": [
     {
