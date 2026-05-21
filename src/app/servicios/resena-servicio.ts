@@ -22,19 +22,11 @@ export class ResenaServicio {
 
   // GET /api/resenas/empresa/{empresaId} - Devuelve las reseñas aprobadas de una empresa
   listarPorEmpresa(empresaId: number): Observable<Resena[]> {
-    const sesion = this.authServicio.obtenerSesion();
-    if (sesion) {
-      return this.http.get<Resena[]>(`${this.baseUrl}/empresa/${empresaId}`, { headers: this.headers() });
-    }
     return this.http.get<Resena[]>(`${this.baseUrl}/empresa/${empresaId}`);
   }
 
   // GET /api/resenas/empresa/{empresaId}/valoracion - Devuelve la media de estrellas de una empresa
   mediaEstrellas(empresaId: number): Observable<number> {
-    const sesion = this.authServicio.obtenerSesion();
-    if (sesion) {
-      return this.http.get<number>(`${this.baseUrl}/empresa/${empresaId}/valoracion`, { headers: this.headers() });
-    }
     return this.http.get<number>(`${this.baseUrl}/empresa/${empresaId}/valoracion`);
   }
 
