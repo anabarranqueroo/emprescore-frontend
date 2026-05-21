@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "ng build --configurtion=production",
   "outputDirectory": "dist/emprescore_frontend/browser",
   "installCommand": "npm install",
   "rewrites": [
