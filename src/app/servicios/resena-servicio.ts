@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Resena } from '../modelos/resena';
 import { AuthServicio } from './auth-servicio';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResenaServicio {
-  private baseUrl = 'http://localhost:8080/api/resenas';
+  private baseUrl = environment.apiUrl + '/resenas';
 
   constructor(private http: HttpClient, private authServicio: AuthServicio) { }
 

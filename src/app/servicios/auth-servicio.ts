@@ -4,13 +4,15 @@ import { LoginRequest } from '../modelos/login-request';
 import { LoginResponse } from '../modelos/login-response';
 import { Usuario } from '../modelos/usuario';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServicio {
 
-  private baseUrl = 'http://localhost:8080/api/auth';
+  private baseUrl = environment.apiUrl + '/auth';
+  //private baseUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
 
